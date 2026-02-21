@@ -33,7 +33,12 @@ public class Main {
 					vault.dashboard();
 					break;
 				case 3:
-					System.out.println(vault.users.keySet());
+					if(vault.users.keySet().isEmpty()) {
+						System.out.println("No Users Found!\n");
+					}
+					else {
+						System.out.println(vault.users.keySet());
+					}
 					break;
 				case 4: 
 					System.out.println("Thankyou For using our app \nExiting....");

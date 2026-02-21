@@ -32,10 +32,10 @@ public class FileManager {
 			
 			switch(choice) {
 			case 1:
-				System.out.println("Enter the File name to create (with .txt:");
+				System.out.println("Enter the File name to create: ");
 				String fileName = sc.nextLine();
 				if(addFile(fileName ,filePath)) {
-					filePath =  filePath + "\\" + fileName;
+					filePath =  filePath + "\\" + fileName + ".txt";
 					System.out.println("Enter the content to encrypt:");
 					addContent(sc.nextLine(), filePath);
 					System.out.println("File " + fileName + " was added & encrypted successfully");
@@ -43,9 +43,14 @@ public class FileManager {
 				break;
 				
 			case 2:
-			    viewFiles(filePath);
-			    System.out.println("Enter a File name to view content:");
-			    openFile(sc.nextLine(), filePath);
+				if(viewFiles(filePath)) {
+					System.out.println("Enter a File name to view content:");
+				    openFile(sc.nextLine(), filePath);
+			    }
+			    else {
+			    	System.out.println("Add a File first.");
+			    }
+			    
 				break;
 			case 3:
 					viewFiles(filePath);
@@ -132,7 +137,7 @@ public void openFile(String fileName, String path ) {
 		BufferedReader fileContent = new BufferedReader(file);
 		String line;
 		while((line = fileContent.readLine()) !=null) {
-			line = crypt.decrypt(line, 10);
+			line = crypt.decrypt(line , 10);
 			System.out.println("\n" + line);
 		}
 		fileContent.close();
